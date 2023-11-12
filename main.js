@@ -1,7 +1,8 @@
 console.log("Hello")
 
 /*
-
+make submit button
+make type work
 
 
 */
@@ -9,7 +10,7 @@ console.log("Hello")
 const app = {
   data: {
     url: "https://itunes.apple.com/search?term=",
-    urlLimit: "&limit=5",
+    urlLimit: "&limit=12",
     musicList: []
   },
 
@@ -18,7 +19,7 @@ const app = {
     // previe buttom
 
     let previewButtons = document.querySelectorAll(".previewButton")
-    for (let button of deleteButtons) {
+    for (let button of previewButtons) {
       button.addEventListener("click", event => {
         event.preventDefault()
         console.log("preview button")
@@ -27,6 +28,7 @@ const app = {
   },
 
   search: function () {
+    this.data.musicList = []
     fetch(this.data.url + "riell" + this.data.urlLimit, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
@@ -34,11 +36,11 @@ const app = {
       .then(r => r.json())
       .then(response => {
         this.data.musicList = []
-        for (let song of response) {
+        for (let song of response.results) {
           this.data.musicList.push(song)
         }
-        this.generateHTML()
         console.log("fetch search done")
+        this.generateHTML()
       })
   },
 
@@ -49,11 +51,11 @@ const app = {
     for (let song of this.data.musicList) {
       container.innerHTML += `
         <div class="musicBlock">
-        <img scr=${musicList.artworkUrl100}
-        <h2>${musicList.trackName}</h2>
-        <p>${musicList.artistName}</p>
-        <p>${musicList.collectionName}</p>
-        <button class="previewButton" data-id="${musicList.trackID}"> Preview </button>
+        <img src="${song.artworkUrl100}">
+        <h3>${song.trackName}</h2>
+        <p>${song.artistName}</p>
+        <p>${song.collectionName}</p>
+        <button class="previewButton" data-id="${song.trackID}"> Preview </button>
         </div>
         `
     }
