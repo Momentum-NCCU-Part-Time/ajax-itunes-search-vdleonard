@@ -1,11 +1,26 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="main.js" defer></script>
-  <title>Music Search</title>
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="main.js" defer></script>
+    <link href="style.css" rel="stylesheet" />
+    <title>Music app</title>
+  </head>
+  <body>
+    <h1>Music app!</h1>
+    <div>preview bar here</div>
+    <div>
+      <fieldset>
+        <select id="searchType" name="searchType">
+          <option value="songTerm">Song Title</option>
+          <option value="artistTerm">Artist</option>
+          <option value="albumTerm">Album</option>
+          
+        </select>
+        <label for="searchInput"><input id="searchInput" name="searchInput" type="text" placeholder="Search" required /></label>
+    
+    </div>
+
+    <div id="listContainer"></div>
+  </body>
 </html>
