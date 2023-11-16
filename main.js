@@ -11,6 +11,7 @@ const app = {
   data: {
     url: "https://itunes.apple.com/search?term=",
     urlLimit: "&limit=12",
+    searchTerm: "",
     musicList: []
   },
 
@@ -22,14 +23,27 @@ const app = {
     for (let button of previewButtons) {
       button.addEventListener("click", event => {
         event.preventDefault()
+        // make audio play previewUrl
+
         console.log("preview button")
+      })
+    }
+
+    let subButtons = document.querySelectorAll(".submitButton")
+
+    for (let subButton of subButtons) {
+      subButton.addEventListener("click", event => {
+        event.preventDefault()
+        app.searchSubmit()
+
+        console.log("submit button")
       })
     }
   },
 
   search: function () {
     this.data.musicList = []
-    fetch(this.data.url + "riell" + this.data.urlLimit, {
+    fetch(this.data.url + this.data.searchTerm + this.data.urlLimit, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     })
@@ -50,7 +64,7 @@ const app = {
     container.innerHTML = ""
     for (let song of this.data.musicList) {
       container.innerHTML += `
-        <div class="musicBlock">
+        <div class="musicBlock" data-id="${song.trackID}">
         <img src="${song.artworkUrl100}">
         <h3>${song.trackName}</h2>
         <p>${song.artistName}</p>
@@ -61,8 +75,14 @@ const app = {
     }
   },
 
+  searchSubmit: function () {
+    let searchTerm = document.getElementById("searchInput").value
+    console.log("search was: " + searchTerm)
+    app.search()
+  },
+
   main: function () {
-    this.search()
+    app.addEventListeners()
     console.log("Main")
   }
 }

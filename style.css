@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: white;
+  color: rgb(196, 194, 194);
 }
 
 body {
@@ -75,4 +75,9 @@ img {
   width: 70px;
   justify-self: flex-end;
   align-self: center;
+}
+
+.previewPlaying {
+  border-style: groove;
+  background-color: rgb(255 255 255 / 0.25);
 }
