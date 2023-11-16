@@ -41,6 +41,12 @@ const app = {
     }
   },
 
+  searchSubmit: function () {
+    this.data.searchTerm = document.getElementById("searchInput").value
+    console.log("search was: " + this.data.searchTerm)
+    app.search()
+  },
+
   search: function () {
     this.data.musicList = []
     fetch(this.data.url + this.data.searchTerm + this.data.urlLimit, {
@@ -53,7 +59,8 @@ const app = {
         for (let song of response.results) {
           this.data.musicList.push(song)
         }
-        console.log("fetch search done")
+        console.log("fetch search done: -" + this.data.url + this.data.searchTerm + this.data.urlLimit + "-")
+
         this.generateHTML()
       })
   },
@@ -73,12 +80,6 @@ const app = {
         </div>
         `
     }
-  },
-
-  searchSubmit: function () {
-    let searchTerm = document.getElementById("searchInput").value
-    console.log("search was: " + searchTerm)
-    app.search()
   },
 
   main: function () {
